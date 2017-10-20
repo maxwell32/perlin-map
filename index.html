@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+   <head>
+        <meta charset = "UTF-8">
+        <title>Perlin Noise</title>
+        <link rel = "stylesheet" 
+            href = "./bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css" />
+        <style type = "text/css">
+        </style>
+        <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>        
+        <script src="./bower_components/jquery/dist/jquery.js"></script>
+        <script src="./bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
+        <script>if (window.module) module = window.module;</script>                
+   </head>
+   
+   <body>
+      <div class = "container">
+            <h1>Perlin Noise Map Generator</h1>
+            <div class="row">
+                <div class="col-sm-7">
+                    <canvas id="perlin-canvas" height="400px" width="400px" style="border: 1px solid #5E5E5E;"></canvas>
+                </div>
+                <div class="col-sm-4">
+                    <button id="generate-map-btn" type="button" class="btn">Generate Map</button>
+                    <button id="start-map-sim" type="button" class="btn">Start Simulation</button>
+                    <div class="checkbox">
+                        <label><input id="random-seed-checkbox" type="checkbox" value="">Random</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="seed">Seed:</label>
+                        <input type="text" class="form-control" id="seed">
+                    </div>
+                    <div class="form-group">
+                        <label for="water-color">Water Color:</label>
+                        <input type="text" data-feature-enum="water" class="form-control map-color-picker" id="water-color" disabled>
+                        <div><input type="range" class="form-control" id="water-range" min="-1.0" max="1.0" step="0.01"><p>Test</p></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="plains-color">Plains Color:</label>
+                        <input type="text" data-feature-enum="plains" class="form-control map-color-picker" id="plains-color" disabled>
+                        <input type="range" class="form-control" id="plains-range" min="-1.0" max="1.0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="forest-color">Forest Color:</label>
+                        <input type="text" data-feature-enum="forest" class="form-control map-color-picker" id="forest-color" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="mountain-color">Mountain Color:</label>
+                        <input type="text" data-feature-enum="mountain" class="form-control map-color-picker" id="mountain-color" disabled>
+                    </div>
+                </div>
+            </div>
+        <script src = "./view.js" ></script>
+      </div>
+   </body>
+</html>
