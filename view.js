@@ -45,7 +45,8 @@ $(document).ready(function(){
     });
     // event handler for spawning the explorer
     $('#start-map-sim').click(function(){
-        myPerlinMap.spawnExplorer();
+        //myPerlinMap.spawnExplorer();
+        myPerlinMap.initBases();
     });
     // call colorpicker on all the inputs that are intended to handle colors
     $('#water-color').attr('value', pColorSteps.water).colorpicker();
@@ -231,11 +232,11 @@ var pMap = function(canvasId){
         return flagLocation;
     };
     // generates a random valid spawn location
-    this.getSpawnLocation = function(){
+    this.getSpawnLocation = function(x1, x2, y1, y2){
         var validSpawn = false;
         while (!validSpawn){
-            var x = Math.floor(Math.random() * this.width);
-            var y = Math.floor(Math.random() * this.height);
+            var x = Math.floor(Math.random() * (x2 - x1) + x1);
+            var y = Math.floor(Math.random() * (y2 - y1) + y1);
             if (this.perlinValueArr[x][y].pValue < .25 && this.perlinValueArr[x][y].pValue >= -.65){
                 validSpawn = true;
                 return new mapCoord(x, y);
@@ -276,5 +277,40 @@ var pMap = function(canvasId){
             }
         });
         easystar.calculate();
+    };
+    this.basecamp = function(x1, y1, x2, y2, color, size){
+        this.color = color;
+        this.size = size;
+        this.x1 = x1;
+        this.x2 = x2;
+        this.y1 = y1;
+        this.y2 = y2;
+    };
+    this.initBases = function(){
+        var base1 = new this.basecamp(0,0,100,100,'red',2);
+        var base2 = new this.basecamp(300,300,400,400,'yellow',2);
+        var baseArr = [base1, base2];
+        this.spawnBases(baseArr);
+    };
+    // spawn a base within the given x , y coordinate pairs (e.g. x1 = 0, y1 = 0, x2=200, y2=200 -> a base somewhere between 0 - 200 on the x axis, and 0 - 200 on the y axis)
+    this.spawnBases = function(baseArr){
+        baseArr.forEach(function(element) {
+            var b = element;
+            var center = this.getSpawnLocation(b.x1, b.x2, b.y1, b.y2);
+            b.center = {x: center.x, y: center.y};
+            var startDraw = {
+                x: (center.x - b.size),
+                y: (center.y - b.size)
+            };
+            var endDraw = {
+                x: (center.x + b.size),
+                y: (center.y + b.size)
+            };
+            for (var i = startDraw.x; i < endDraw.x; i++){
+                for (var j = startDraw.y; j < endDraw.y; j++){
+                    this.colorPoint(i, j, b.color);
+                }
+            }  
+        }, this);
     };
 }

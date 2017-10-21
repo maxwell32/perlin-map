@@ -7,6 +7,9 @@
             href = "./bower_components/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="./bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css" />
         <style type = "text/css">
+            .row {
+                margin-top: 25px;
+            }
         </style>
         <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>        
         <script src="./bower_components/jquery/dist/jquery.js"></script>
@@ -16,14 +19,13 @@
    
    <body>
       <div class = "container">
-            <h1>Perlin Noise Map Generator</h1>
             <div class="row">
                 <div class="col-sm-7">
                     <canvas id="perlin-canvas" height="400px" width="400px" style="border: 1px solid #5E5E5E;"></canvas>
                 </div>
                 <div class="col-sm-4">
                     <button id="generate-map-btn" type="button" class="btn">Generate Map</button>
-                    <button id="start-map-sim" type="button" class="btn">Start Simulation</button>
+                    <button id="start-map-sim" type="button" class="btn">Spawn Explorer</button>
                     <div class="checkbox">
                         <label><input id="random-seed-checkbox" type="checkbox" value="">Random</label>
                     </div>
